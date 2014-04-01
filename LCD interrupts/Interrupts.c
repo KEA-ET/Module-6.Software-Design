@@ -15,7 +15,7 @@
 #define LDR_interval 200; 
 #define temp_interval 500;
 #define key_interval 20;
-#define backlight_interval 50;
+#define backlight_interval 20;
 
 // RTOS timer variables: 
 
