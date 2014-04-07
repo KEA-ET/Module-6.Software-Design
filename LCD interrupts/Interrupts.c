@@ -11,7 +11,7 @@
 
 // RTOS timer intervals:
 
-#define clock_interval 1000;         
+#define clock_interval 100; // 0.1 seconds        
 #define LDR_interval 200; 
 #define temp_interval 500;
 #define key_interval 20;

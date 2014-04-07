@@ -35,7 +35,10 @@ int main (void)
       // Function run flags:
       if(clock_run)
       {  
-         clock();
+         clock(key);
+         //LCD_goto (17,1);
+         //LCD_prt(key);
+
          clock_run = false;
       }   
 
