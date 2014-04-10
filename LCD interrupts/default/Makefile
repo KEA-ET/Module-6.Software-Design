@@ -35,7 +35,7 @@ HEX_EEPROM_FLAGS += --change-section-lma .eeprom=0 --no-change-warnings
 
 
 ## Objects that must be built in order to link
-OBJECTS = Main.o LCD.o Keyboard.o ADC.o DAC.o Interrupts.o clock.o LCD_fixed_text.o 
+OBJECTS = Main.o LCD.o Keyboard.o ADC.o DAC.o Interrupts.o clock.o LCD_fixed_text.o SetClock.o 
 
 ## Objects explicitly added by the user
 LINKONLYOBJECTS = 
@@ -66,6 +66,9 @@ clock.o: ../clock.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 LCD_fixed_text.o: ../LCD_fixed_text.c
+	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
+
+SetClock.o: ../SetClock.c
 	$(CC) $(INCLUDES) $(CFLAGS) -c  $<
 
 ##Link

@@ -2,48 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include "SetClock.h"
+#include "Interrupts.h"
 
-unsigned char seconds;
-unsigned char minutes;
-unsigned char hours;
+static uint8_t seconds;
+static uint8_t minutes;
+static uint8_t hours;
+static char save[2];
 
-void clock(char key)
-{  
+int clock_master;
 
-
-
-   static uint16_t counter = 0;
-   static uint8_t toggle = true;
-   static uint8_t wait_timer = 0;
-   const static uint8_t wait_interval = 5;
-   char save[2];
-
-   if (wait_timer > 0)  
+void clock(void)
+{           
+   switch (clock_master)
    {
-      wait_timer--;
-   }
+      case 0:
 
-   // debug:
-   
-//   LCD_goto (18,1);
-//   LCD_prt(key);
-
-   //toggles clock on/off
-   if (key == '*' && wait_timer == 0)
-   {
-      toggle = !toggle;
-      wait_timer = wait_interval; // reset timer
-   }
-   
-   switch (toggle)
-   {
-
-      case 0: // clock stopped
       LCD_goto(1,1);
-      LCD_str("--:--:--");
+      LCD_str("--:--:--"); 
       break;
-         
-      case 1: // clock running
+
+      case 1:
 
       LCD_goto(1,1); 
       sprintf(save, "%02d", hours);
@@ -56,16 +36,10 @@ void clock(char key)
       sprintf(save, "%02d", seconds);
       LCD_str(save);
 
-
-      counter++; // 10 counts at 0.1 seconds intervals = 1 seconds
-      if (counter%10 == 0)
-      {
-      seconds = (counter/10);
-      }
+      seconds++;
 
       if(seconds == 60)
       {
-         counter = 0;
          seconds = 0;
          minutes++;
       }
@@ -80,9 +54,16 @@ void clock(char key)
       {
          hours=0;
       }
-      break;
+
+      break; 
    }
 }
 
+void clockUpdate(uint8_t h, uint8_t m, uint8_t s)
+{
+   hours = h;
+   minutes = m;
+   seconds = s;
+}
 
 

@@ -15,8 +15,11 @@
 #include "LCD_fixed_text.h"
 #include "Interrupts.h"
 #include "Keyboard.h"
+#include "SetClock.h"
 
 static char key;
+
+int debug = true;
 
 /***********************/
 // Main Program
@@ -35,12 +38,17 @@ int main (void)
       // Function run flags:
       if(clock_run)
       {  
-         clock(key);
-         //LCD_goto (17,1);
-         //LCD_prt(key);
-
+         clock(); // dummy variables
+         
          clock_run = false;
       }   
+
+      if(SetClock_run)
+      {
+         SetClock(key);
+         SetClock_run = false;
+      }
+
 
       if(LDR_run)
    
@@ -58,6 +66,8 @@ int main (void)
       if(key_run)
       {  
          key = KEY_read();
+          LCD_goto(18,1);
+         LCD_prt(key);
          key_run = false;
 
       }

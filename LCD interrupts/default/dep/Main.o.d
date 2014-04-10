@@ -18,7 +18,7 @@ Main.o: ../Main.c c:/winavr-20071221/bin/../avr/include/string.h \
   c:/winavr-20071221/bin/../avr/include/stdlib.h \
   c:\winavr-20071221\bin\../lib/gcc/avr/4.2.2/include/stdbool.h \
   ../clock.h ../LCD.h ../ADC.h ../DAC.h ../LCD_fixed_text.h \
-  ../Interrupts.h ../Keyboard.h
+  ../Interrupts.h ../Keyboard.h ../SetClock.h
 
 c:/winavr-20071221/bin/../avr/include/string.h:
 
@@ -71,3 +71,5 @@ c:\winavr-20071221\bin\../lib/gcc/avr/4.2.2/include/stdbool.h:
 ../Interrupts.h:
 
 ../Keyboard.h:
+
+../SetClock.h:
