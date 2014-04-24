@@ -38,7 +38,7 @@ int main (void)
       // Function run flags:
       if(clock_run)
       {  
-         clock(); // dummy variables
+         clock();
          
          clock_run = false;
       }   
@@ -66,10 +66,9 @@ int main (void)
       if(key_run)
       {  
          key = KEY_read();
-          LCD_goto(18,1);
+         LCD_goto(18,1);
          LCD_prt(key);
          key_run = false;
-
       }
 
        if(backlight_run)

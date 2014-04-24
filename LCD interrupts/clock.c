@@ -9,32 +9,18 @@
 static uint8_t seconds;
 static uint8_t minutes;
 static uint8_t hours;
-static char save[2];
+static char save[8];
 
 int clock_master;
 
 void clock(void)
 {           
-   switch (clock_master)
+   if (clock_master == true)
    {
-      case 0:
-
-      LCD_goto(1,1);
-      LCD_str("--:--:--"); 
-      break;
-
-      case 1:
 
       LCD_goto(1,1); 
-      sprintf(save, "%02d", hours);
-      LCD_str(save);
-      LCD_goto(4,1);
-   
-      sprintf(save, "%02d", minutes);
-      LCD_str(save);
-      LCD_goto(7,1);
-      sprintf(save, "%02d", seconds);
-      LCD_str(save);
+      sprintf(save, "%02d:%02d:%02d", hours, minutes, seconds);
+      LCD_str(save);  
 
       seconds++;
 
@@ -53,9 +39,7 @@ void clock(void)
       if(hours == 24)
       {
          hours=0;
-      }
-
-      break; 
+      } 
    }
 }
 

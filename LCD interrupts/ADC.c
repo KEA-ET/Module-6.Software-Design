@@ -1,6 +1,3 @@
-//woooho
-
-
 #define F_CPU 16000000UL // 16 MHz clock speed
 
 #include <stdlib.h>
