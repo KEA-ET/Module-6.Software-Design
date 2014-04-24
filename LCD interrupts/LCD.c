@@ -227,6 +227,7 @@ void LCD_clr()
 	LCD_cmd(0x01); // Clears LCD and returns cursor to home
 }
 
+
 /***********************/
 // LCD Backlight Dimmer
 // Input: 
@@ -238,15 +239,15 @@ void BL_dimmer (char key)
    static uint8_t toggle = true;
    static uint8_t wait_timer = 0;
    
-   const static uint8_t wait_interval = 10;
+   #define wait_interval 10
    #define fade_speed 15
    #define test_max 240
    #define test_min 15
+   
    // set up TIMER2 with no prescaler and fast PWM mode
    TCCR2 |= (1 << WGM20)|(1 << WGM21)|(1 << CS20)|(1 << COM21);
 
-   //delay function to avoid multiple key-presses:
-   if (wait_timer > 0)  
+   if (wait_timer > 0)
    {
       wait_timer--;
    }

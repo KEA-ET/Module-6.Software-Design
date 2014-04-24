@@ -5,22 +5,27 @@
 #include "LCD.h"
 #include "Keyboard.h"
 #include "ADC.h"
-#include "Interrupts.h"
+#include "Interrupts.h" //???
 #include "clock.h"
 #include <stdbool.h>
 
 // RTOS timer intervals:
 
-#define clock_interval 1000;         
+#define clock_interval 1000; // 1 second 
+#define SetClock_interval 40;      
 #define LDR_interval 200; 
 #define temp_interval 500;
 #define key_interval 20;
 #define backlight_interval 20;
 
+
 // RTOS timer variables: 
 
 int clock_run;
 int clock_count;
+
+int SetClock_run;
+int SetClock_count;
 
 int LDR_run;
 int LDR_count;
@@ -33,6 +38,8 @@ int key_count;
 
 int backlight_run;
 int backlight_count;
+
+
 
 // Initialize timer, interrupt and variable
 void timer1_init()
@@ -60,6 +67,12 @@ ISR (TIMER1_COMPA_vect)
    { 
       clock_count = clock_interval;
       clock_run = true;
+   } 
+
+    if(SetClock_count-- == 0)
+   { 
+      SetClock_count = SetClock_interval;
+      SetClock_run = true;
    } 
 
    if(LDR_count-- == 0)

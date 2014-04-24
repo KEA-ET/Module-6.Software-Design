@@ -15,8 +15,11 @@
 #include "LCD_fixed_text.h"
 #include "Interrupts.h"
 #include "Keyboard.h"
+#include "SetClock.h"
 
 static char key;
+
+int debug = true;
 
 /***********************/
 // Main Program
@@ -36,8 +39,16 @@ int main (void)
       if(clock_run)
       {  
          clock();
+         
          clock_run = false;
       }   
+
+      if(SetClock_run)
+      {
+         SetClock(key);
+         SetClock_run = false;
+      }
+
 
       if(LDR_run)
    
@@ -55,8 +66,9 @@ int main (void)
       if(key_run)
       {  
          key = KEY_read();
+         LCD_goto(18,1);
+         LCD_prt(key);
          key_run = false;
-
       }
 
        if(backlight_run)

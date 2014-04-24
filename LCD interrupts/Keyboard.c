@@ -3,7 +3,6 @@
 #include <util/delay.h>
 #include "Keyboard.h"
 
-
 /***************************/
 // Initialize rows for read
 // Input: None
@@ -43,7 +42,7 @@ void col_init()
 char KEY_read()
 { 
    unsigned char curr_char = 0;
-   static unsigned char prev_char = 'Z';
+   static unsigned char prev_char = 'Z'; // dummy character
    unsigned int y,x,z;
 
    rows_init();
@@ -51,7 +50,7 @@ char KEY_read()
 
    col_init();
    x = PINB | 0b11111000; //read col inputs
-  
+
    z=x&y; 
 
 	switch (z)
@@ -105,19 +104,17 @@ char KEY_read()
 	   	curr_char = ('3');
 		   break; 
    }
-
-      
+  
    if (curr_char == prev_char)
-      {   
-         prev_char = curr_char;  
-         return curr_char;
-         
-      }
-      else
-      {  
-         prev_char = curr_char;
-         return 0;
-         
-      }
-      
+   {      
+      prev_char = curr_char;
+      return curr_char;
+   }
+
+   else
+   { 
+      prev_char = curr_char;
+      return 0;   
+   }
 }
+
